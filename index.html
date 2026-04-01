@@ -5,58 +5,57 @@
 .pmw-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:1.75rem;padding-bottom:1.25rem;border-bottom:0.5px solid var(--color-border-tertiary)}
 .pmw-icon{width:38px;height:38px;background:#085041;border-radius:var(--border-radius-md);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .pmw-icon svg{width:20px;height:20px;fill:none;stroke:#5DCAA5;stroke-width:2;stroke-linecap:round}
-.pmw-header h1{font-size:20px;font-weight:500;color:var(--color-text-primary);line-height:1.2}
-.pmw-header p{font-size:12px;color:var(--color-text-secondary);margin-top:3px;letter-spacing:.02em}
+.pmw-header h1{font-size:20px;font-weight:500;color:var(--color-text-primary);line-height:1.2;font-family:var(--font-sans)}
+.pmw-badge{display:inline-block;margin-top:5px;background:#E1F5EE;border:0.5px solid #9FE1CB;border-radius:20px;padding:2px 10px;font-size:11px;font-weight:500;color:#085041;font-family:var(--font-sans)}
 .pmw-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);margin-bottom:10px;overflow:hidden}
 .pmw-card-top{padding:9px 16px;border-bottom:0.5px solid var(--color-border-tertiary);background:var(--color-background-secondary);display:flex;align-items:center;gap:7px}
 .pmw-card-dot{width:7px;height:7px;border-radius:50%;background:#1D9E75;flex-shrink:0}
-.pmw-card-top span{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--color-text-secondary)}
+.pmw-card-top span{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--color-text-secondary);font-family:var(--font-sans)}
 .pmw-card-body{padding:14px 16px}
 textarea.pmw-seq{width:100%;background:#0c1410;border:none;border-radius:var(--border-radius-md);color:#4dbc8a;font-family:var(--font-mono);font-size:13px;line-height:1.75;letter-spacing:.05em;padding:12px 14px;resize:vertical;outline:none;caret-color:#4dbc8a}
 textarea.pmw-seq::placeholder{color:#1e3a28}
 .pmw-stats{display:flex;gap:0;margin-top:10px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);overflow:hidden}
-.pmw-stat{flex:1;padding:7px 12px;background:var(--color-background-secondary);font-size:12px;color:var(--color-text-secondary);border-right:0.5px solid var(--color-border-tertiary)}
+.pmw-stat{flex:1;padding:7px 12px;background:var(--color-background-secondary);font-size:12px;color:var(--color-text-secondary);border-right:0.5px solid var(--color-border-tertiary);font-family:var(--font-sans)}
 .pmw-stat:last-child{border-right:none}
-.pmw-stat b{color:var(--color-text-primary);font-weight:500;font-family:var(--font-mono);font-size:12px}
-.pmw-warn{flex:2;padding:7px 12px;background:#FCEBEB;font-size:12px;color:#A32D2D;border-right:none;display:none}
+.pmw-stat b{color:var(--color-text-primary);font-weight:500;font-family:var(--font-sans);font-size:12px}
+.pmw-warn{flex:2;padding:7px 12px;background:#FCEBEB;font-size:12px;color:#A32D2D;border-right:none;display:none;font-family:var(--font-sans)}
 .pmw-pairs{display:flex;flex-direction:column;gap:8px}
 .pmw-pair{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:12px 14px;background:var(--color-background-secondary);display:grid;grid-template-columns:1fr 30px 1fr 30px;gap:10px;align-items:end}
-.pmw-pair-field{}
-.pmw-pair-label{font-size:11px;font-weight:500;letter-spacing:.05em;display:flex;align-items:center;gap:5px;margin-bottom:5px}
+.pmw-pair-label{font-size:11px;font-weight:500;letter-spacing:.05em;display:flex;align-items:center;gap:5px;margin-bottom:5px;font-family:var(--font-sans)}
 .pmw-pair-label .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
 .pmw-pair-label.orig{color:#8B3A1E}
 .pmw-pair-label.orig .dot{background:#D85A30}
 .pmw-pair-label.mut{color:#085041}
 .pmw-pair-label.mut .dot{background:#1D9E75}
-select{width:100%;font-size:12px}
+select{width:100%;font-size:12px;font-family:var(--font-sans)}
 .pmw-arr{display:flex;align-items:center;justify-content:center;padding-bottom:5px;color:var(--color-text-secondary);font-size:15px;font-weight:500}
 .pmw-rm{background:none;border:0.5px solid var(--color-border-tertiary);border-radius:6px;color:var(--color-text-secondary);cursor:pointer;font-size:12px;width:30px;height:34px;display:flex;align-items:center;justify-content:center;align-self:end;transition:border-color .15s,color .15s}
 .pmw-rm:hover{border-color:#E24B4A;color:#E24B4A}
-.pmw-add{width:100%;margin-top:8px;background:none;border:0.5px dashed var(--color-border-secondary);border-radius:var(--border-radius-md);color:var(--color-text-secondary);cursor:pointer;font-size:13px;padding:9px;transition:all .15s}
+.pmw-add{width:100%;margin-top:8px;background:none;border:0.5px dashed var(--color-border-secondary);border-radius:var(--border-radius-md);color:var(--color-text-secondary);cursor:pointer;font-size:13px;padding:9px;transition:all .15s;font-family:var(--font-sans)}
 .pmw-add:hover{border-color:#1D9E75;color:#0F6E56}
 .pmw-actions{display:flex;gap:8px;margin-bottom:10px}
-.pmw-calc{flex:1;background:#085041;border:none;border-radius:var(--border-radius-md);color:#fff;cursor:pointer;font-size:14px;font-weight:500;padding:11px;transition:background .15s}
+.pmw-calc{flex:1;background:#085041;border:none;border-radius:var(--border-radius-md);color:#fff;cursor:pointer;font-size:14px;font-weight:500;padding:11px;transition:background .15s;font-family:var(--font-sans)}
 .pmw-calc:hover{background:#04342C}
-.pmw-clr{background:none;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);color:var(--color-text-secondary);cursor:pointer;font-size:13px;padding:11px 18px;transition:all .15s}
+.pmw-clr{background:none;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);color:var(--color-text-secondary);cursor:pointer;font-size:13px;padding:11px 18px;transition:all .15s;font-family:var(--font-sans)}
 .pmw-clr:hover{border-color:#E24B4A;color:#E24B4A}
 .pmw-result{display:none;border-radius:var(--border-radius-lg);overflow:hidden;border:0.5px solid var(--color-border-tertiary)}
 .pmw-result.ok{display:block;border-color:#1D9E75}
 .pmw-result.err{display:block;border-color:#E24B4A}
-.pmw-result-banner{padding:8px 16px;font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:6px}
+.pmw-result-banner{padding:8px 16px;font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:6px;font-family:var(--font-sans)}
 .pmw-result.ok .pmw-result-banner{background:#E1F5EE;color:#085041;border-bottom:0.5px solid #9FE1CB}
 .pmw-result.err .pmw-result-banner{background:#FCEBEB;color:#791F1F;border-bottom:0.5px solid #F7C1C1}
 .pmw-result-body{padding:18px 16px 14px;background:var(--color-background-primary)}
 .pmw-mw-row{display:flex;align-items:baseline;gap:10px;margin-bottom:2px}
-.pmw-mw{font-size:40px;font-weight:500;font-family:var(--font-mono);color:var(--color-text-primary);line-height:1}
-.pmw-unit{font-size:15px;color:var(--color-text-secondary);font-weight:400}
-.pmw-kda{font-size:14px;font-family:var(--font-mono);color:var(--color-text-secondary);margin-bottom:14px}
+.pmw-mw{font-size:40px;font-weight:500;font-family:var(--font-sans);color:var(--color-text-primary);line-height:1}
+.pmw-unit{font-size:15px;color:var(--color-text-secondary);font-weight:400;font-family:var(--font-sans)}
+.pmw-kda{font-size:14px;font-family:var(--font-sans);color:var(--color-text-secondary);margin-bottom:14px}
 .pmw-chips{display:flex;flex-wrap:wrap;gap:6px;padding-top:12px;border-top:0.5px solid var(--color-border-tertiary)}
-.pmw-chip{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:20px;padding:4px 11px;font-size:12px;color:var(--color-text-secondary)}
+.pmw-chip{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:20px;padding:4px 11px;font-size:12px;color:var(--color-text-secondary);font-family:var(--font-sans)}
 .pmw-chip b{color:var(--color-text-primary);font-weight:500}
 .pmw-chip.delta-pos b{color:#0F6E56}
 .pmw-chip.delta-neg b{color:#993C1D}
-.pmw-err-msg{font-size:13px;color:#A32D2D;padding:2px 0}
-.pmw-copy{background:none;border:0.5px solid var(--color-border-tertiary);border-radius:6px;color:var(--color-text-secondary);cursor:pointer;font-size:12px;padding:4px 10px;margin-top:10px;display:inline-block}
+.pmw-err-msg{font-size:13px;color:#A32D2D;padding:2px 0;font-family:var(--font-sans)}
+.pmw-copy{background:none;border:0.5px solid var(--color-border-tertiary);border-radius:6px;color:var(--color-text-secondary);cursor:pointer;font-size:12px;padding:4px 10px;margin-top:10px;display:inline-block;font-family:var(--font-sans)}
 .pmw-copy:hover{border-color:#1D9E75;color:#085041}
 </style>
 
@@ -66,8 +65,8 @@ select{width:100%;font-size:12px}
       <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2v-4M9 21H5a2 2 0 01-2-2v-4m0 0h18"/></svg>
     </div>
     <div>
-      <h1>Protein MW Calculator</h1>
-      <p>Residue summation &middot; Non-canonical amino acid support &middot; Mutation correction</p>
+      <h1>Protein Molecular Weight Calculator</h1>
+      <div class="pmw-badge">Noncanonical amino acid support</div>
     </div>
   </div>
 
@@ -105,7 +104,7 @@ select{width:100%;font-size:12px}
 <script>
 const RES={A:71.079,C:103.139,D:115.088,E:129.115,F:147.177,G:57.052,H:137.142,I:113.16,K:128.175,L:113.16,M:131.193,N:114.104,P:97.117,Q:128.131,R:156.189,S:87.078,T:101.105,V:99.133,W:186.214,Y:163.176};
 const CANON=[["0","None"],["89.094","A – Alanine"],["121.154","C – Cysteine"],["133.103","D – Aspartate"],["147.130","E – Glutamate"],["165.192","F – Phenylalanine"],["75.067","G – Glycine"],["155.157","H – Histidine"],["131.175","I – Isoleucine"],["146.190","K – Lysine"],["131.175","L – Leucine"],["149.208","M – Methionine"],["132.119","N – Asparagine"],["115.132","P – Proline"],["146.146","Q – Glutamine"],["174.204","R – Arginine"],["105.093","S – Serine"],["119.120","T – Threonine"],["117.148","V – Valine"],["204.229","W – Tryptophan"],["181.191","Y – Tyrosine"]];
-const NCAA=[["180.17","3cnpa"],["200.15","3no2pa"],["359.256","5FAzoF"],["301.350","AAPF"],["207.229","AcetylPhe (AcF)"],["180.207","AminoPhe (AmF)"],["205.217","AzaTrp (AzaW)"],["206.205","AzidoPhe (AzF)"],["243.266","BiPyridylAla (BPyA)"],["246.307","BocLys (BocK)"],["221.019","BoronicPhe (BoW)"],["209.008","BoronoPhe (BoF)"],["241.070","BoronoPhenylCys (BPC)"],["283.125","BromoTrp (BrW)"],["263.27","CBDS"],["238.671","ChloroTrp (ClW)"],["263.249","Coumarin (Hco)"],["190.202","CyanoPhe (CNF)"],["191.190","CyanoPyridylAla (CNP)"],["229.239","CyanoTrp (CNW)"],["266.238","CysCF3"],["223.250","CysCNP"],["224.238","CysCNPym"],["231.215","DCPN1"],["201.173","DiFluoroPhe (F2F)"],["217.172","DiFluoroTyr (F2Y)"],["235.615","F2ClF"],["243.30","FetPhC"],["183.182","FluoroPhe (FF)"],["222.219","FluoroTrp (FW)"],["199.181","FluoroTyr (FY)"],["232.239","FormylTrp (CHOW)"],["-21.04","GFP Chromophore (−H5O)"],["316.328","H-Cys(DMNB)"],["220.228","HydroxyTrp (OHW)"],["234.255","MethoxyTrp (MeOW)"],["262.265","MeCOOW"],["179.219","MethylPhe (mF)"],["267.201","NBDO"],["330.17","NBDSe"],["249.23","NitroTrp (NO2W)"],["256.276","oNBCys"],["303.19","oNBSec"],["255.144","PentaFluoroPhe (F5F)"],["291.236","SF5"],[" 340.16","PF7"],["185.072","PhosphoSer (pSer)"],["199.099","PhosphoThr (pThr)"],["219.240","PropargylTyr (ProY)"],["-23.05","RFP Chromophore (−H7O)"],["168.07","Selenocysteine (Sec)"],["261.248","SulfoTyr (SO3Y)"],["237.299","tBuTyr (tBuY)"],["242.198","TFALys (TFAK)"],["276.408","TMSLys (TMSK)"],["275.424","TMSNLys (TMSNK)"],["233.190","CF3Phe (CF3F)"],["249.189","CF3Tyr (CF3Y)"]];
+const NCAA=[["180.17","3cnpa"],["200.15","3no2pa"],["359.256","5FAzoF"],["301.350","AAPF"],["207.229","AcetylPhe (AcF)"],["180.207","AminoPhe (AmF)"],["205.217","AzaTrp (AzaW)"],["206.205","AzidoPhe (AzF)"],["243.266","BiPyridylAla (BPyA)"],["246.307","BocLys (BocK)"],["221.019","BoronicPhe (BoW)"],["209.008","BoronoPhe (BoF)"],["241.070","BoronoPhenylCys (BPC)"],["283.125","BromoTrp (BrW)"],["263.27","CBDS"],["238.671","ChloroTrp (ClW)"],["263.249","Coumarin (Hco)"],["190.202","CyanoPhe (CNF)"],["191.190","CyanoPyridylAla (CNP)"],["229.239","CyanoTrp (CNW)"],["266.238","CysCF3"],["223.250","CysCNP"],["224.238","CysCNPym"],["231.215","DCPN1"],["201.173","DiFluoroPhe (F2F)"],["217.172","DiFluoroTyr (F2Y)"],["235.615","F2ClF"],["243.30","FetPhC"],["183.182","FluoroPhe (FF)"],["222.219","FluoroTrp (FW)"],["199.181","FluoroTyr (FY)"],["232.239","FormylTrp (CHOW)"],["-21.04","GFP Chromophore (−H5O)"],["316.328","H-Cys(DMNB)"],["220.228","HydroxyTrp (OHW)"],["234.255","MethoxyTrp (MeOW)"],["262.265","MeCOOW"],["179.219","MethylPhe (mF)"],["267.201","NBDO"],["330.17","NBDSe"],["249.23","NitroTrp (NO2W)"],["256.276","oNBCys"],["303.19","oNBSec"],["255.144","PentaFluoroPhe (F5F)"],["291.236","SF5"],["340.16","PF7"],["185.072","PhosphoSer (pSer)"],["199.099","PhosphoThr (pThr)"],["219.240","PropargylTyr (ProY)"],["-23.05","RFP Chromophore (−H7O)"],["168.07","Selenocysteine (Sec)"],["261.248","SulfoTyr (SO3Y)"],["237.299","tBuTyr (tBuY)"],["242.198","TFALys (TFAK)"],["276.408","TMSLys (TMSK)"],["275.424","TMSNLys (TMSNK)"],["233.190","CF3Phe (CF3F)"],["249.189","CF3Tyr (CF3Y)"]];
 
 function buildOpts(ncaa){
   let h=CANON.map(([v,n])=>`<option value="${v}">${n}</option>`).join('');
@@ -121,7 +120,7 @@ function pmwAdd(){
   const n=g.children.length+1;
   const d=document.createElement('div');
   d.className='pmw-pair';d.id=`pp${id}`;
-  d.innerHTML=`<div class="pmw-pair-field"><div class="pmw-pair-label orig"><span class="dot"></span>Original ${n}</div><select id="po${id}">${buildOpts(false)}</select></div><div class="pmw-arr">→</div><div class="pmw-pair-field"><div class="pmw-pair-label mut"><span class="dot"></span>Mutant ${n}</div><select id="pm${id}">${buildOpts(true)}</select></div><button class="pmw-rm" onclick="pmwRm(${id})">✕</button>`;
+  d.innerHTML=`<div><div class="pmw-pair-label orig"><span class="dot"></span>Original ${n}</div><select id="po${id}">${buildOpts(false)}</select></div><div class="pmw-arr">→</div><div><div class="pmw-pair-label mut"><span class="dot"></span>Mutant ${n}</div><select id="pm${id}">${buildOpts(true)}</select></div><button class="pmw-rm" onclick="pmwRm(${id})">✕</button>`;
   g.appendChild(d);
 }
 function pmwRm(id){const e=document.getElementById(`pp${id}`);if(e)e.remove();}
