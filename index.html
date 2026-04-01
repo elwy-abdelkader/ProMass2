@@ -592,7 +592,7 @@ function pmwLive() {
     w.style.display = 'flex';
   } else {
     document.getElementById('pmw-live').textContent =
-      mw >= 1000 ? `${(mw/1000).toFixed(3)} kDa` : `${mw.toFixed(2)} Da`;
+      mw >= 1000 ? `${(mw/1000).toFixed(2)} kDa` : `${mw.toFixed(2)} Da`;
     w.style.display = 'none';
   }
 }
@@ -639,10 +639,10 @@ function pmwCalc() {
   }
 
   const final = base + corr;
-  const sign  = v => (v >= 0 ? '+' : '') + v.toFixed(3);
+  const sign  = v => (v >= 0 ? '+' : '') + v.toFixed(2);
 
   let chips = `
-    <div class="pmw-chip">Base sequence <b>${base.toFixed(3)} Da</b></div>
+    <div class="pmw-chip">Base sequence <b>${base.toFixed(2)} Da</b></div>
     <div class="pmw-chip">Length <b>${s.length} aa</b></div>
   `;
   for (const d of deltas) {
@@ -651,14 +651,14 @@ function pmwCalc() {
   }
   if (deltas.length) chips += `<div class="pmw-chip">Net correction <b>${sign(corr)} Da</b></div>`;
 
-  const copyText = `${final.toFixed(3)} Da / ${(final/1000).toFixed(4)} kDa`;
+  const copyText = final.toFixed(2);
   bEl.textContent = 'Result';
   bdEl.innerHTML = `
     <div class="pmw-mw-row">
-      <span class="pmw-mw">${final.toFixed(3)}</span>
+      <span class="pmw-mw">${final.toFixed(2)}</span>
       <span class="pmw-unit">Da</span>
     </div>
-    <div class="pmw-kda">${(final/1000).toFixed(4)} kDa</div>
+    <div class="pmw-kda">${(final/1000).toFixed(2)} kDa</div>
     <div class="pmw-chips">${chips}</div>
     <button class="pmw-copy" onclick="doCopy('${copyText}', this)">Copy result</button>
   `;
