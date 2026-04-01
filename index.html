@@ -271,17 +271,53 @@
 
     .pmw-struct-row {
       grid-column: 1 / -1;
-      padding-top: 8px;
-      border-top: 0.5px solid #e4dfd6;
-      margin-top: 4px;
+      margin-top: 10px;
     }
-    .pmw-struct-svg {
-      width: 100%;
+    .pmw-struct-wrap {
+      background: var(--bg-primary);
+      border: 0.5px solid var(--border-lo);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      padding: 8px 4px;
+    }
+    .pmw-struct-canvas {
+      width: 100% !important;
       height: 200px;
-      border-radius: 8px;
-      background: #ffffff;
       display: block;
+      background: transparent !important;
     }
+
+
+    body.dark {
+      --bg-page:       #1a1816;
+      --bg-primary:    #242220;
+      --bg-secondary:  #2c2a28;
+      --text-primary:  #f0ece3;
+      --text-secondary:#9e9a94;
+      --border-lo:     #3a3834;
+      --border-mid:    #4a4844;
+      --border-hi:     #5e5c58;
+      --teal-bg:       #0c2820;
+      --teal-border:   #1d6050;
+      --teal-text:     #4dbc8a;
+      --teal-dot:      #1d9e75;
+      --teal-dark:     #5dcaa5;
+      --coral-text:    #e07050;
+      --red-bg:        #2a1818;
+      --red-border:    #6a2828;
+      --red-text:      #e07070;
+      --red-label:     #e07070;
+    }
+    * { transition: background-color .2s, border-color .2s, color .15s; }
+    .pmw-dark-btn {
+      align-self: center;
+      background: none; border: 0.5px solid var(--border-mid);
+      border-radius: var(--radius-md); color: var(--text-secondary);
+      cursor: pointer; font-family: var(--font-sans);
+      font-size: 18px; line-height: 1; padding: 4px 8px;
+      transition: border-color .15s, color .15s;
+    }
+    .pmw-dark-btn:hover { border-color: var(--border-hi); color: var(--text-primary); }
 
     @media (max-width: 520px) {
       .pmw-pair { grid-template-columns: 1fr 1fr; }
@@ -302,6 +338,7 @@
       <h1>Protein Molecular Weight Calculator</h1>
       <div class="pmw-badge">Noncanonical amino acid support</div>
     </div>
+    <button class="pmw-dark-btn" id="pmw-dark-btn" onclick="toggleDark()" title="Toggle dark mode">☀</button>
 
   </div>
 
@@ -318,7 +355,7 @@
   </div>
 
   <div class="pmw-card">
-    <div class="pmw-card-top"><div class="pmw-card-dot" style="background:#d85a30"></div><span>Mutations / Non-canonical substitutions</span></div>
+    <div class="pmw-card-top"><div class="pmw-card-dot" style="background:#d85a30"></div><span>Mutations / Noncanonical substitutions</span></div>
     <div class="pmw-card-body">
       <div class="pmw-pairs" id="pmw-pairs"></div>
       <button class="pmw-add" onclick="pmwAdd()">+ Add mutation pair</button>
@@ -349,7 +386,11 @@ const NCAA=[["234.05","3Brpa"],["189.6","3Clpa"],["180.17","3cnpa"],["281.05","3
 
 
 const SMILES_DB = {
-  "3cnpa":                 "O=C(O)[C@H](CN1C=CC(C#N)=N1)N",
+  "3Brpa": "O=C(O)[C@H](CN1C=CC(Br)=N1)N",
+  "3Clpa": "O=C(O)[C@H](CN1C=CC(Cl)=N1)N",
+  "3Ipa": "O=C(O)[C@H](CN1C=CC(I)=N1)N",
+  "pyrazolyl alanine (pa)": "O=C(O)[C@H](CN1C=CC=N1)N",
+  "3cnpa":                 "N[C@@H](Cc1cccc(C#N)c1)C(=O)O",
   "3no2pa":                "N[C@@H](Cc1cccc([N+](=O)[O-])c1)C(=O)O",
   "5FAzoF":                "N[C@@H](Cc1ccc(/N=N/c2ccc(F)cc2)cc1)C(=O)O",
   "AcetylPhe (AcF)":       "CC(=O)c1ccc(C[C@@H](N)C(=O)O)cc1",
@@ -411,13 +452,13 @@ function drawStructure(id) {
   const smiles = lookupSmiles(name);
   if (!smiles || typeof SmilesDrawer === 'undefined') { row.style.display='none'; return; }
   row.style.display = 'block';
-  const svgEl = document.getElementById('pmw-svg-'+id);
-  while (svgEl.firstChild) svgEl.removeChild(svgEl.firstChild);
+  const canvas = document.getElementById('pmw-cvs-'+id);
+  const isDark = document.body.classList.contains('dark');
+  const theme = isDark ? 'dark' : 'light';
   try {
-    const drawer = new SmilesDrawer.SvgDrawer({ width:500, height:200, compactDrawing:false });
+    const drawer = new SmilesDrawer.Drawer({ width: canvas.offsetWidth||500, height:180, compactDrawing:false, explicitHydrogens:false });
     SmilesDrawer.parse(smiles, function(tree) {
-      drawer.draw(tree, svgEl, 'light');
-      svgEl.setAttribute('width','100%');
+      drawer.draw(tree, canvas, theme, false);
     }, function() { row.style.display='none'; });
   } catch(e) { row.style.display='none'; }
 }
@@ -433,7 +474,7 @@ function buildOpts(ncaa) {
       ...NCAA,
       ...CUSTOM_NCAA.map(aa => [String(aa.mw), aa.name])
     ].sort((a, b) => a[1].localeCompare(b[1]));
-    h += `<optgroup label="Non-canonical amino acids">`;
+    h += `<optgroup label="Noncanonical amino acids">`;
     h += combined.map(([v,n]) => `<option value="${v}">${n}</option>`).join('');
     h += `</optgroup>`;
   }
@@ -459,7 +500,7 @@ function pmwAdd() {
   const id = ++pid, n = g.children.length + 1;
   const d = document.createElement('div');
   d.className = 'pmw-pair'; d.id = `pp${id}`;
-  d.innerHTML = `<div><div class="pmw-pair-label orig"><span class="dot"></span>Original ${n}</div><select id="po${id}">${buildOpts(false)}</select></div><div class="pmw-arr">→</div><div><div class="pmw-pair-label mut"><span class="dot"></span>Mutant ${n}</div><select id="pm${id}" onchange="drawStructure(${id})">${buildOpts(true)}</select></div><button class="pmw-rm" onclick="pmwRm(${id})">✕</button><div class="pmw-struct-row" id="pmw-sr-${id}" style="display:none"><svg id="pmw-svg-${id}" class="pmw-struct-svg"></svg></div>`;
+  d.innerHTML = `<div><div class="pmw-pair-label orig"><span class="dot"></span>Original ${n}</div><select id="po${id}">${buildOpts(false)}</select></div><div class="pmw-arr">→</div><div><div class="pmw-pair-label mut"><span class="dot"></span>Mutant ${n}</div><select id="pm${id}" onchange="drawStructure(${id})">${buildOpts(true)}</select></div><button class="pmw-rm" onclick="pmwRm(${id})">✕</button><div class="pmw-struct-row" id="pmw-sr-${id}" style="display:none"><div class="pmw-struct-wrap"><canvas id="pmw-cvs-${id}" class="pmw-struct-canvas" height="180"></canvas></div></div>`;
   g.appendChild(d);
 }
 function pmwRm(id) { const e = document.getElementById(`pp${id}`); if (e) e.remove(); }
@@ -513,8 +554,20 @@ function pmwClear() {
 }
 
 
+
+function toggleDark() {
+  const dark = document.body.classList.toggle('dark');
+  document.getElementById('pmw-dark-btn').textContent = dark ? '☾' : '☀';
+  try { localStorage.setItem('pmw-dark', dark ? '1' : '0'); } catch(e) {}
+  // redraw all visible structures with correct theme
+  const g = document.getElementById('pmw-pairs');
+  for (const p of g.children) { const id=p.id.replace('pp',''); drawStructure(id); }
+}
+(function(){
+  try { if (localStorage.getItem('pmw-dark')==='1') { document.body.classList.add('dark'); document.getElementById('pmw-dark-btn').textContent='☾'; } } catch(e) {}
+})();
+
 document.getElementById('pmw-seq').addEventListener('input', pmwLive);
-pmwAdd();
 pmwAdd();
 </script>
 
