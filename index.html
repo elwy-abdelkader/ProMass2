@@ -5,9 +5,9 @@
   <title>Protein Molecular Weight Calculator</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet">
   <style>
     :root {
       --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
@@ -107,6 +107,9 @@
     .pmw-stat:last-child { border-right: none; }
     .pmw-stat b { color: var(--text-primary); font-weight: 500; font-size: 12px; }
     .pmw-warn { flex: 2; padding: 7px 12px; background: var(--red-bg); font-size: 12px; color: var(--red-label); display: none; }
+    .pmw-stats2 { display: flex; margin-top: 1px; border: 0.5px solid var(--border-lo); border-top: none; border-radius: 0 0 var(--radius-md) var(--radius-md); overflow: hidden; }
+    .pmw-stats2 .pmw-stat { border-top: none; }
+    .pmw-stats2 .pmw-stat sup { font-size: 9px; }
 
     /* Mutation pairs */
     .pmw-pairs { display: flex; flex-direction: column; gap: 8px; }
@@ -321,6 +324,30 @@
     }
     .pmw-dark-btn:hover { border-color: var(--border-hi); color: var(--text-primary); }
 
+    .pmw-seq-selector {
+      display: flex; gap: 8px; align-items: center; margin-bottom: 10px;
+    }
+    .pmw-seq-selector select {
+      flex: 1; font-size: 13px;
+    }
+    .pmw-seq-load-btn {
+      background: none; border: 0.5px solid var(--border-mid);
+      border-radius: var(--radius-md); color: var(--text-secondary);
+      cursor: pointer; font-family: var(--font-sans); font-size: 12px;
+      font-weight: 500; padding: 6px 12px; white-space: nowrap;
+      transition: border-color .15s, color .15s;
+    }
+    .pmw-seq-load-btn:hover { border-color: var(--teal-dot); color: var(--teal-text); }
+    .pmw-ss-list { display: flex; flex-direction: column; gap: 6px; }
+    .pmw-ss-empty { font-size: 12px; color: var(--text-secondary); text-align: center; padding: 14px 0; border: 0.5px dashed var(--border-mid); border-radius: var(--radius-md); }
+    .pmw-ss { display: flex; align-items: center; gap: 8px; padding: 8px 10px; background: var(--bg-secondary); border: 0.5px solid var(--border-lo); border-radius: var(--radius-md); }
+    .pmw-ss-info { flex: 1; min-width: 0; }
+    .pmw-ss-name { font-size: 13px; font-weight: 500; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .pmw-ss-len  { font-size: 11px; color: var(--text-secondary); font-family: var(--font-mono); }
+    .pmw-ss-del { background: none; border: 0.5px solid var(--border-lo); border-radius: 6px; color: var(--text-secondary); cursor: pointer; font-size: 11px; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: border-color .15s, color .15s; }
+    .pmw-ss-del:hover { border-color: #e24b4a; color: #e24b4a; }
+    .pmw-panel-divider { height: 0.5px; background: var(--border-lo); margin: 4px 0; }
+
     @media (max-width: 520px) {
       .pmw-pair { grid-template-columns: 1fr 1fr; }
       .pmw-arr  { display: none; }
@@ -347,11 +374,19 @@
   <div class="pmw-card">
     <div class="pmw-card-top"><div class="pmw-card-dot"></div><span>Amino acid sequence</span></div>
     <div class="pmw-card-body">
+      <div class="pmw-seq-selector" id="pmw-seq-selector" style="display:none">
+        <select id="pmw-seq-pick" onchange="previewSeq()"><option value="">— Load saved sequence —</option></select>
+        <button class="pmw-seq-load-btn" onclick="loadSeq()">Load</button>
+      </div>
       <textarea class="pmw-seq" id="pmw-seq" rows="4" placeholder="Paste single-letter sequence (lowercase accepted)" spellcheck="false"></textarea>
-      <div class="pmw-stats">
+      <div class="pmw-stats" style="border-radius:var(--radius-md) var(--radius-md) 0 0">
         <div class="pmw-stat">Length&nbsp;<b id="pmw-len">0</b> aa</div>
         <div class="pmw-stat">Base MW&nbsp;<b id="pmw-live">—</b></div>
         <div class="pmw-warn" id="pmw-warn"></div>
+      </div>
+      <div class="pmw-stats2">
+        <div class="pmw-stat">pI&nbsp;<b id="pmw-pi">—</b></div>
+        <div class="pmw-stat" style="flex:2">ε<sub>280</sub>&nbsp;<b id="pmw-ext">—</b><span id="pmw-ext2" style="font-size:11px;color:var(--text-secondary)"></span></div>
       </div>
     </div>
   </div>
@@ -374,7 +409,12 @@
     <div class="pmw-result-body" id="pmw-result-body"></div>
   </div>
 
+  <footer style="margin-top:2rem;padding-top:1rem;border-top:0.5px solid var(--border-lo);text-align:center">
+    <p style="font-size:12px;color:var(--text-secondary)">© 2026 <a href="mailto:elwy.abdelkader@anu.edu.au" style="color:var(--teal-text);text-decoration:none;font-weight:500">Elwy H. Abdelkader</a></p>
+  </footer>
+
 </div>
+
 
 
 <script>
@@ -467,6 +507,7 @@ function drawStructure(id) {
 
 // Custom entries — replaced when "Download updated file" is clicked
 const CUSTOM_NCAA = []; /* @custom_ncaa@ */
+const SAVED_SEQS = []; /* @saved_seqs@ */
 
 
 function buildOpts(ncaa) {
@@ -509,17 +550,67 @@ function pmwRm(id) { const e = document.getElementById(`pp${id}`); if (e) e.remo
 
 function getSeq() { return document.getElementById('pmw-seq').value.replace(/\s/g,'').toUpperCase(); }
 
+
+function calcPi(seq) {
+  const cnt = {D:0,E:0,C:0,H:0,K:0,R:0,Y:0};
+  for (const a of seq) { if (cnt.hasOwnProperty(a)) cnt[a]++; }
+  const pKaN=8.0, pKaC=3.1;
+  const pKa = {D:3.9, E:4.1, C:8.3, H:6.0, K:10.5, R:12.5, Y:10.1};
+  function charge(pH) {
+    let q = 1/(1+Math.pow(10,pH-pKaN))          // N-term
+            + cnt.H/(1+Math.pow(10,pH-pKa.H))
+            + cnt.K/(1+Math.pow(10,pH-pKa.K))
+            + cnt.R/(1+Math.pow(10,pH-pKa.R))
+            - 1/(1+Math.pow(10,pKaC-pH))         // C-term
+            - cnt.D/(1+Math.pow(10,pKa.D-pH))
+            - cnt.E/(1+Math.pow(10,pKa.E-pH))
+            - cnt.C/(1+Math.pow(10,pKa.C-pH))
+            - cnt.Y/(1+Math.pow(10,pKa.Y-pH));
+    return q;
+  }
+  let lo=0, hi=14;
+  for (let i=0;i<200;i++) { const mid=(lo+hi)/2; charge(mid)>0?lo=mid:hi=mid; }
+  return ((lo+hi)/2).toFixed(2);
+}
+
+function calcExt(seq) {
+  let W=0,Y=0,C=0;
+  for (const a of seq) { if(a==='W')W++; else if(a==='Y')Y++; else if(a==='C')C++; }
+  const reduced  = W*5500 + Y*1490;
+  const oxidized = reduced + Math.floor(C/2)*125;
+  return {reduced, oxidized};
+}
+
 function pmwLive() {
   const raw = document.getElementById('pmw-seq').value.toUpperCase();
   document.getElementById('pmw-seq').value = raw.replace(/[^ACDEFGHIKLMNPQRSTVWY\s\n\r]/gi,'');
   const s = getSeq();
   document.getElementById('pmw-len').textContent = s.length;
   const w = document.getElementById('pmw-warn');
-  if (!s.length) { document.getElementById('pmw-live').textContent='—'; w.style.display='none'; return; }
+  if (!s.length) {
+    document.getElementById('pmw-live').textContent='—';
+    document.getElementById('pmw-pi').textContent='—';
+    document.getElementById('pmw-ext').textContent='—';
+    document.getElementById('pmw-ext2').textContent='';
+    w.style.display='none'; return;
+  }
   let mw=18.015, bad=null;
   for (const a of s) { if (!RES[a]) { bad=a; break; } mw+=RES[a]; }
-  if (bad) { document.getElementById('pmw-live').textContent='—'; w.textContent=`Unknown: "${bad}"`; w.style.display='flex'; }
-  else { document.getElementById('pmw-live').textContent=mw>=1000?`${(mw/1000).toFixed(2)} kDa`:`${mw.toFixed(2)} Da`; w.style.display='none'; }
+  if (bad) {
+    document.getElementById('pmw-live').textContent='—';
+    document.getElementById('pmw-pi').textContent='—';
+    document.getElementById('pmw-ext').textContent='—';
+    document.getElementById('pmw-ext2').textContent='';
+    w.textContent=`Unknown: "${bad}"`; w.style.display='flex';
+  } else {
+    document.getElementById('pmw-live').textContent=mw>=1000?`${(mw/1000).toFixed(2)} kDa`:`${mw.toFixed(2)} Da`;
+    w.style.display='none';
+    document.getElementById('pmw-pi').textContent = calcPi(s);
+    const ext = calcExt(s);
+    document.getElementById('pmw-ext').textContent = ext.reduced.toLocaleString() + ' M\u207Bcm\u207B';
+    document.getElementById('pmw-ext2').textContent = ext.oxidized !== ext.reduced
+      ? ` \u2022 ${ext.oxidized.toLocaleString()} M\u207Bcm\u207B (with S\u2013S)` : '';
+  }
 }
 
 function pmwCalc() {
@@ -556,6 +647,30 @@ function pmwClear() {
 }
 
 
+function renderSeqSelector() {
+  const sel = document.getElementById('pmw-seq-pick');
+  const wrap = document.getElementById('pmw-seq-selector');
+  if (!sel) return;
+  if (SAVED_SEQS.length === 0) { wrap.style.display='none'; return; }
+  wrap.style.display = 'flex';
+  const cur = sel.value;
+  sel.innerHTML = '<option value="">— Load saved sequence —</option>' +
+    SAVED_SEQS.map((s,i) => `<option value="${i}">${s.name} (${s.seq.length} aa)</option>`).join('');
+  if (cur !== '') sel.value = cur;
+}
+
+function previewSeq() {}
+
+function loadSeq() {
+  const sel = document.getElementById('pmw-seq-pick');
+  if (!sel || sel.value === '') return;
+  const s = SAVED_SEQS[parseInt(sel.value)];
+  if (!s) return;
+  document.getElementById('pmw-seq').value = s.seq;
+  pmwLive();
+}
+
+
 
 function toggleDark() {
   const dark = document.body.classList.toggle('dark');
@@ -570,6 +685,7 @@ function toggleDark() {
 })();
 
 document.getElementById('pmw-seq').addEventListener('input', pmwLive);
+renderSeqSelector();
 pmwAdd();
 </script>
 
