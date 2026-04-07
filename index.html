@@ -348,13 +348,31 @@
     .pmw-ss-del:hover { border-color: #e24b4a; color: #e24b4a; }
     .pmw-panel-divider { height: 0.5px; background: var(--border-lo); margin: 4px 0; }
 
+    .pmw-ext-card {
+      margin-top: 10px; border-radius: var(--radius-lg);
+      overflow: hidden; border: 0.5px solid var(--teal-border);
+    }
+    .pmw-ext-banner {
+      padding: 8px 16px; font-size: 10px; font-weight: 500;
+      letter-spacing: .1em; text-transform: uppercase;
+      background: var(--teal-bg); color: var(--teal-text);
+      border-bottom: 0.5px solid var(--teal-border);
+    }
+    .pmw-ext-body { padding: 14px 16px; background: var(--bg-primary); }
+    .pmw-ext-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .pmw-ext-table th { text-align: left; color: var(--text-secondary); font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; padding: 0 12px 8px 0; }
+    .pmw-ext-table td { padding: 5px 12px 5px 0; color: var(--text-primary); border-top: 0.5px solid var(--border-lo); }
+    .pmw-ext-table td:last-child { color: var(--text-secondary); font-size: 12px; }
+    .pmw-ext-note { font-size: 11px; color: var(--text-secondary); margin-top: 10px; line-height: 1.5; }
+    .pmw-ext-source { font-size: 11px; color: var(--text-secondary); margin-top: 6px; font-style: italic; }
+
     @media (max-width: 520px) {
       .pmw-pair { grid-template-columns: 1fr 1fr; }
       .pmw-arr  { display: none; }
       .pmw-panel { width: 100%; }
     }
   </style>
-  <script src="https://unpkg.com/smiles-drawer@2.0.1/dist/smiles-drawer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/smiles-drawer@1.0.10/dist/smiles-drawer.min.js"></script>
 </head>
 <body>
 <div class="pmw">
@@ -408,23 +426,27 @@
     <div class="pmw-result-banner" id="pmw-result-banner"></div>
     <div class="pmw-result-body" id="pmw-result-body"></div>
   </div>
+  <div class="pmw-ext-card" id="pmw-ext-card" style="display:none">
+    <div class="pmw-ext-banner">Extinction coefficients</div>
+    <div class="pmw-ext-body" id="pmw-ext-body"></div>
+  </div>
 
   <footer style="margin-top:2rem;padding-top:1rem;border-top:0.5px solid var(--border-lo);text-align:center">
-    <p style="font-size:12px;color:var(--text-secondary)">© 2026 <a href="mailto:elwy.abdelkader@anu.edu.au" style="color:var(--teal-text);text-decoration:none;font-weight:500">Elwy H. Abdelkader</a></p>
+    <p style="font-size:12px;color:var(--text-secondary)">© 2026 <a href="/cdn-cgi/l/email-protection#c9aca5beb0e7a8abadaca5a2a8adacbb89a8a7bce7acadbce7a8bc" style="color:var(--teal-text);text-decoration:none;font-weight:500">Elwy H. Abdelkader</a></p>
   </footer>
 
 </div>
 
 
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const RES = {
   A:71.079,C:103.139,D:115.088,E:129.115,F:147.177,G:57.052,H:137.142,
   I:113.16,K:128.175,L:113.16,M:131.193,N:114.104,P:97.117,Q:128.131,
   R:156.189,S:87.078,T:101.105,V:99.133,W:186.214,Y:163.176
 };
 const CANON=[["0","None"],["89.094","A – Alanine"],["121.154","C – Cysteine"],["133.103","D – Aspartate"],["147.130","E – Glutamate"],["165.192","F – Phenylalanine"],["75.067","G – Glycine"],["155.157","H – Histidine"],["131.175","I – Isoleucine"],["146.190","K – Lysine"],["131.175","L – Leucine"],["149.208","M – Methionine"],["132.119","N – Asparagine"],["115.132","P – Proline"],["146.146","Q – Glutamine"],["174.204","R – Arginine"],["105.093","S – Serine"],["119.120","T – Threonine"],["117.148","V – Valine"],["204.229","W – Tryptophan"],["181.191","Y – Tyrosine"]];
-const NCAA=[["234.05","3Brpa"],["189.6","3Clpa"],["180.17","3cnpa"],["281.05","3Ipa"],["200.15","3no2pa"],["359.256","5FAzoF"],["301.350","AAPF"],["207.229","AcetylPhe (AcF)"],["180.207","AminoPhe (AmF)"],["205.217","AzaTrp (AzaW)"],["206.205","AzidoPhe (AzF)"],["243.266","BiPyridylAla (BPyA)"],["246.307","BocLys (BocK)"],["221.019","BoronicPhe (BoW)"],["209.008","BoronoPhe (BoF)"],["241.070","BoronoPhenylCys (BPC)"],["283.125","BromoTrp (BrW)"],["263.27","CBDS"],["233.190","CF3Phe (CF3F)"],["249.189","CF3Tyr (CF3Y)"],["238.671","ChloroTrp (ClW)"],["263.249","Coumarin (Hco)"],["190.202","CyanoPhe (CNF)"],["191.190","CyanoPyridylAla (CNP)"],["229.239","CyanoTrp (CNW)"],["266.238","CysCF3"],["223.250","CysCNP"],["224.238","CysCNPym"],["231.215","DCPN1"],["201.173","DiFluoroPhe (F2F)"],["217.172","DiFluoroTyr (F2Y)"],["235.615","F2ClF"],["243.30","FetPhC"],["183.182","FluoroPhe (FF)"],["222.219","FluoroTrp (FW)"],["199.181","FluoroTyr (FY)"],["232.239","FormylTrp (CHOW)"],["-21.04","GFP Chromophore (−H5O)"],["316.328","H-Cys(DMNB)"],["220.228","HydroxyTrp (OHW)"],["262.265","MeCOOW"],["234.255","MethoxyTrp (MeOW)"],["179.219","MethylPhe (mF)"],["267.201","NBDO"],["330.17","NBDSe"],["249.23","NitroTrp (NO2W)"],["256.276","oNBCys"],["303.19","oNBSec"],["255.144","PentaFluoroPhe (F5F)"],["340.16","PF7"],["185.072","PhosphoSer (pSer)"],["199.099","PhosphoThr (pThr)"],["219.240","PropargylTyr (ProY)"],["155.16","pyrazolyl alanine (pa)"],["-23.05","RFP Chromophore (−H7O)"],["168.07","Selenocysteine (Sec)"],["291.236","SF5"],["261.248","SulfoTyr (SO3Y)"],["237.299","tBuTyr (tBuY)"],["242.198","TFALys (TFAK)"],["276.408","TMSLys (TMSK)"],["275.424","TMSNLys (TMSNK)"]];
+const NCAA=[["155.16","pyrazolyl alanine (pa)"],["234.05","3Brpa"],["189.6","3Clpa"],["180.17","3CNpa"],["200.15","3NO2pa"],["205.217","4-AzaTrp (4AW)"],["229.239","4-CN-Trp"],["205.217","5-AzaTrp (5AW)"],["229.239","5-CN-Trp"],["359.256","5FAzoF"],["205.217","6-AzaTrp (6AW)"],["229.239","6-CN-Trp"],["205.217","7-AzaTrp (7AW)"],["229.239","7-CN-Trp"],["301.350","AAPF"],["207.229","AcetylPhe (AcF)"],["180.207","AminoPhe (AmF)"],["206.205","AzidoPhe (AzF)"],["243.266","BiPyridylAla (BPyA)"],["246.307","BocLys (BocK)"],["221.019","BoronicPhe (BoW)"],["209.008","BoronoPhe (BoF)"],["241.070","BoronoPhenylCys (BPC)"],["283.125","BromoTrp (BrW)"],["263.27","CBDS"],["233.190","CF3Phe (CF3F)"],["249.189","CF3Tyr (CF3Y)"],["238.671","ChloroTrp (ClW)"],["263.249","Coumarin (Hco)"],["190.202","CyanoPhe (CNF)"],["191.190","mCyanoPyridylAla (mCNP)"],["191.190","pCyanoPyridylAla (pCNP)"],["266.238","CysCF3"],["223.250","CysCNP"],["224.238","CysCNPym"],["231.215","DCPN1"],["201.173","DiFluoroPhe (F2F)"],["217.172","DiFluoroTyr (F2Y)"],["235.615","F2ClF"],["243.30","FetPhC"],["183.182","FluoroPhe (FF)"],["222.219","FluoroTrp (FW)"],["199.181","FluoroTyr (FY)"],["232.239","FormylTrp (CHOW)"],["-21.04","GFP Chromophore (−H5O)"],["316.328","H-Cys(DMNB)"],["220.228","HydroxyTrp (OHW)"],["262.265","MeCOOW"],["234.255","MethoxyTrp (MeOW)"],["179.219","MethylPhe (mF)"],["267.201","NBDO"],["330.17","NBDSe"],["249.23","NitroTrp (NO2W)"],["256.276","oNBCys"],["303.19","oNBSec"],["255.144","PentaFluoroPhe (F5F)"],["340.16","PF7"],["185.072","PhosphoSer (pSer)"],["199.099","PhosphoThr (pThr)"],["219.240","PropargylTyr (ProY)"],["-23.05","RFP Chromophore (−H7O)"],["168.07","Selenocysteine (Sec)"],["291.236","SF5"],["261.248","SulfoTyr (SO3Y)"],["237.299","tBuTyr (tBuY)"],["242.198","TFALys (TFAK)"],["276.408","TMSLys (TMSK)"],["275.424","TMSNLys (TMSNK)"]];
 
 
 const SMILES_DB = {
@@ -432,43 +454,50 @@ const SMILES_DB = {
   "3Clpa": "O=C(O)[C@H](CN1C=CC(Cl)=N1)N",
   "3Ipa": "O=C(O)[C@H](CN1C=CC(I)=N1)N",
   "pyrazolyl alanine (pa)": "O=C(O)[C@H](CN1C=CC=N1)N",
-  "3cnpa":                 "N[C@@H](Cc1cccc(C#N)c1)C(=O)O",
-  "3no2pa":                "N[C@@H](Cc1cccc([N+](=O)[O-])c1)C(=O)O",
-  "5FAzoF":                "N[C@@H](Cc1ccc(/N=N/c2ccc(F)cc2)cc1)C(=O)O",
+  "3CNpa":                 "O=C(O)[C@H](CN1C=CC(C#N)=N1)N",
+  "3NO2pa":                "O=C([C@@H](N)CN1C=CC([N+]([O-])=O)=N1)O",
+  "5FAzoF":                "N[C@H](C(O)=O)Cc1ccc(/N=N/c2c(F)c(F)c(F)c(F)c2F)cc1",
   "AcetylPhe (AcF)":       "CC(=O)c1ccc(C[C@@H](N)C(=O)O)cc1",
   "AminoPhe (AmF)":        "N[C@@H](Cc1ccc(N)cc1)C(=O)O",
-  "AzaTrp (AzaW)":         "N[C@@H](Cc1c[nH]c2ncccc12)C(=O)O",
+  "4-AzaTrp (4AW)":         "O=C(O)[C@H](CC1=CNC2=CC=CN=C12)N",
+  "5-AzaTrp (5AW)":         "O=C(O)[C@H](CC1=CNC2=CC=NC=C12)N",
+  "6-AzaTrp (6AW)":         "O=C(O)[C@H](CC1=CNC2=CN=CC=C12)N",
+  "7-AzaTrp (7AW)":         "O=C(O)[C@H](CC1=CNC2=NC=CC=C12)N",
   "AzidoPhe (AzF)":        "N[C@@H](Cc1ccc([N-]=[N+]=[N])cc1)C(=O)O",
-  "BiPyridylAla (BPyA)":   "N[C@@H](Cc1ccnc(-c2ccncc2)c1)C(=O)O",
+  "BiPyridylAla (BPyA)":   "N[C@H](C(O)=O)Cc1cc(c2ccccn2)ncc1",
   "BocLys (BocK)":         "CC(C)(C)OC(=O)NCCCC[C@@H](N)C(=O)O",
-  "BoronicPhe (BoW)":      "N[C@@H](Cc1ccc(B(O)O)cc1)C(=O)O",
+  "BoronicPhe (BoW)":      "",
   "BoronoPhe (BoF)":       "N[C@@H](Cc1ccc(B(O)O)cc1)C(=O)O",
   "BoronoPhenylCys (BPC)": "N[C@@H](CSc1ccc(B(O)O)cc1)C(=O)O",
-  "BromoTrp (BrW)":        "N[C@@H](Cc1c[nH]c2cc(Br)ccc12)C(=O)O",
-  "ChloroTrp (ClW)":       "N[C@@H](Cc1c[nH]c2cc(Cl)ccc12)C(=O)O",
-  "Coumarin (Hco)":        "N[C@@H](Cc1cc(=O)oc2cc(O)ccc12)C(=O)O",
+  "BromoTrp (BrW)":        "O=C(O)[C@H](CC1=CNC2=C(Br)C=CC=C12)N",
+  "ChloroTrp (ClW)":       "O=C(O)[C@H](CC1=CNC2=C(Cl)C=CC=C12)N",
+  "Coumarin (HCo)":        "N[C@@H](CCc(cc(=O)o1)c2c1cc(O)cc2)C(O)=O",
   "CyanoPhe (CNF)":        "N[C@@H](Cc1ccc(C#N)cc1)C(=O)O",
-  "CyanoPyridylAla (CNP)": "N[C@@H](Cc1cncc(C#N)c1)C(=O)O",
-  "CyanoTrp (CNW)":        "N[C@@H](Cc1c[nH]c2cc(C#N)ccc12)C(=O)O",
-  "CysCF3":                "N[C@@H](CSC(F)(F)F)C(=O)O",
-  "CysCNP":                "N[C@@H](CSc1ccnc(C#N)c1)C(=O)O",
-  "CysCNPym":              "N[C@@H](CSc1ccnc(C#N)n1)C(=O)O",
-  "DiFluoroPhe (F2F)":     "N[C@@H](Cc1ccc(F)c(F)c1)C(=O)O",
-  "DiFluoroTyr (F2Y)":     "N[C@@H](Cc1cc(F)cc(F)c1O)C(=O)O",
-  "F2ClF":                 "N[C@@H](Cc1ccc(Cl)c(F)c1F)C(=O)O",
+  "mCyanoPyridylAla (mCNP)": "N[C@H](C(O)=O)Cc1ccnc(C#N)c1",
+  "pCyanoPyridylAla (pCNP)": "N[C@H](C(O)=O)Cc1ccc(C#N)nc1",
+  "4-CN-Trp":               "O=C(O)[C@H](CC1=CNC2=CC=CC(C#N)=C12)N",
+  "5-CN-Trp":               "O=C(O)[C@H](CC1=CNC2=CC=C(C#N)C=C12)N",
+  "6-CN-Trp":               "O=C(O)[C@H](CC1=CNC2=CC(C#N)=CC=C12)N",
+  "7-CN-Trp":               "O=C(O)[C@H](CC1=CNC2=C(C#N)C=CC=C12)N",
+  "CysCF3":                "N[C@H](C(O)=O)CSC1=CC(C(F)(F)F)=CC=N1",
+  "CysCNP":                "N[C@H](C(O)=O)CSC1=CC(C#N)=CC=N1",
+  "CysCNPym":              "N[C@H](C(O)=O)CSC1=NC(C#N)=CC=N1",
+  "DiFluoroPhe (F2F)":     "N[C@H](C(O)=O)Cc1cc(F)cc(F)c1",
+  "DiFluoroTyr (F2Y)":     "N[C@H](C(O)=O)Cc1cc(F)c(O)c(F)c1",
+  "F2ClF":                 "N[C@H](C(O)=O)Cc1cc(F)c(Cl)c(F)c1",
   "FluoroPhe (FF)":        "N[C@@H](Cc1ccc(F)cc1)C(=O)O",
-  "FluoroTrp (FW)":        "N[C@@H](Cc1c[nH]c2cc(F)ccc12)C(=O)O",
+  "FluoroTrp (FW)":        "O=C(O)[C@H](CC1=CNC2=C(F)C=CC=C12)N",
   "FluoroTyr (FY)":        "N[C@@H](Cc1ccc(O)c(F)c1)C(=O)O",
-  "FormylTrp (CHOW)":      "N[C@@H](Cc1c[nH]c2cc(C=O)ccc12)C(=O)O",
+  "FormylTrp (CHOW)":      "O=C(O)[C@H](CC1=CNC2=C(C=O)C=CC=C12)N",
   "H-Cys(DMNB)":           "N[C@@H](CSCc1cc(OC)c(OC)cc1[N+](=O)[O-])C(=O)O",
-  "HydroxyTrp (OHW)":      "N[C@@H](Cc1c[nH]c2cc(O)ccc12)C(=O)O",
-  "MethoxyTrp (MeOW)":     "N[C@@H](Cc1c[nH]c2cc(OC)ccc12)C(=O)O",
-  "MeCOOW":                "N[C@@H](Cc1c[nH]c2cc(C(=O)OC)ccc12)C(=O)O",
+  "HydroxyTrp (OHW)":      "O=C(O)[C@H](CC1=CNC2=C(O)C=CC=C12)N",
+  "MethoxyTrp (MeOW)":     "O=C(O)[C@H](CC1=CNC2=C(OC)C=CC=C12)N",
+  "MeCOOW":                "O=C(O)[C@H](CC1=CNC2=C(C(OC)=O)C=CC=C12)N",
   "MethylPhe (mF)":        "N[C@@H](Cc1ccc(C)cc1)C(=O)O",
-  "NitroTrp (NO2W)":       "N[C@@H](Cc1c[nH]c2cc([N+](=O)[O-])ccc12)C(=O)O",
+  "NitroTrp (NO2W)":       "O=C(O)[C@H](CC1=CNC2=C([N+]([O-])=O)C=CC=C12)N",
   "oNBCys":                "N[C@@H](CSCc1ccccc1[N+](=O)[O-])C(=O)O",
   "PentaFluoroPhe (F5F)":  "N[C@@H](Cc1c(F)c(F)c(F)c(F)c1F)C(=O)O",
-  "SF5":                   "N[C@@H](Cc1ccc(S(F)(F)(F)(F)F)cc1)C(=O)O",
+  "SF5":                   "N[C@H](C(O)=O)Cc1ccc(S(F)(F)(F)(F)F)cc1",
   "PhosphoSer (pSer)":     "N[C@@H](COP(=O)(O)O)C(=O)O",
   "PhosphoThr (pThr)":     "C[C@@H](OP(=O)(O)O)[C@@H](N)C(=O)O",
   "PropargylTyr (ProY)":   "N[C@@H](Cc1ccc(OCC#C)cc1)C(=O)O",
@@ -477,7 +506,21 @@ const SMILES_DB = {
   "tBuTyr (tBuY)":         "N[C@@H](Cc1ccc(OC(C)(C)C)cc1)C(=O)O",
   "TFALys (TFAK)":         "N[C@@H](CCCCNC(=O)C(F)(F)F)C(=O)O",
   "CF3Phe (CF3F)":         "N[C@@H](Cc1ccc(C(F)(F)F)cc1)C(=O)O",
-  "CF3Tyr (CF3Y)":         "N[C@@H](Cc1ccc(O)c(C(F)(F)F)c1)C(=O)O"
+  "CF3Tyr (CF3Y)":         "N[C@H](C(O)=O)Cc1ccc(OC(F)(F)F)cc1"
+};
+
+
+const CANON_EXT = { W: 5500, Y: 1490 };
+
+const NCAA_EXT = {
+  "4-CN-Trp":        [{wl:280, eps:2304}, {wl:305, eps:6041}],
+  "5-CN-Trp":        [{wl:280, eps:4835}],
+  "6-CN-Trp":        [{wl:280, eps:5940}],
+  "7-CN-Trp":        [{wl:280, eps:3064}, {wl:305, eps:8289}],
+  "4-AzaTrp (4AW)":  [{wl:280, eps:6209}, {wl:290, eps:7364}],
+  "5-AzaTrp (5AW)":  [{wl:280, eps:2407}],
+  "6-AzaTrp (6AW)":  [{wl:280, eps:1116}, {wl:325, eps:2611}],
+  "7-AzaTrp (7AW)":  [{wl:280, eps:6453}, {wl:290, eps:7541}]
 };
 
 function lookupSmiles(name) {
@@ -492,15 +535,31 @@ function drawStructure(id) {
   if (!sel || !row) return;
   const name = sel.options[sel.selectedIndex].text;
   const smiles = lookupSmiles(name);
-  if (!smiles || typeof SmilesDrawer === 'undefined') { row.style.display='none'; return; }
+  if (!smiles) { row.style.display='none'; return; }
+  if (typeof SmilesDrawer === 'undefined') {
+    row.style.display='none'; return;
+  }
   row.style.display = 'block';
-  const canvas = document.getElementById('pmw-cvs-'+id);
+  const canvasId = 'pmw-cvs-'+id;
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) { row.style.display='none'; return; }
   const isDark = document.body.classList.contains('dark');
   const theme = isDark ? 'dark' : 'light';
+  const w = canvas.parentElement ? canvas.parentElement.offsetWidth || 480 : 480;
+  canvas.width = w;
+  canvas.height = 200;
   try {
-    const drawer = new SmilesDrawer.Drawer({ width: canvas.offsetWidth||500, height:180, compactDrawing:false, explicitHydrogens:false });
+    const drawer = new SmilesDrawer.Drawer({
+      width: w, height: 200,
+      compactDrawing: false,
+      explicitHydrogens: false,
+      themes: {
+        light: { C:'#222', O:'#c0392b', N:'#2980b9', S:'#d4ac0d', P:'#8e44ad', F:'#16a085', Cl:'#27ae60', Br:'#935116', I:'#6c3483', H:'#555' },
+        dark:  { C:'#ddd', O:'#e74c3c', N:'#3498db', S:'#f1c40f', P:'#9b59b6', F:'#1abc9c', Cl:'#2ecc71', Br:'#e67e22', I:'#8e44ad', H:'#aaa' }
+      }
+    });
     SmilesDrawer.parse(smiles, function(tree) {
-      drawer.draw(tree, canvas, theme, false);
+      try { drawer.draw(tree, canvasId, theme, false); } catch(e2) { row.style.display='none'; }
     }, function() { row.style.display='none'; });
   } catch(e) { row.style.display='none'; }
 }
@@ -508,6 +567,15 @@ function drawStructure(id) {
 // Custom entries — replaced when "Download updated file" is clicked
 const CUSTOM_NCAA = []; /* @custom_ncaa@ */
 const SAVED_SEQS = []; /* @saved_seqs@ */
+
+function getCustomExt(name) {
+  for (const aa of CUSTOM_NCAA) { if (aa.name===name && aa.ext280) return [{wl:280,eps:aa.ext280}]; }
+  return null;
+}
+
+function lookupNcaaExt(name) {
+  return NCAA_EXT[name] || getCustomExt(name) || null;
+}
 
 
 function buildOpts(ncaa) {
@@ -633,6 +701,52 @@ function pmwCalc() {
   bEl.textContent='Result';
   bdEl.innerHTML=`<div class="pmw-mw-row"><span class="pmw-mw">${final.toFixed(2)}</span><span class="pmw-unit">Da</span></div><div class="pmw-kda">${(final/1000).toFixed(2)} kDa</div><div class="pmw-chips">${chips}</div><button class="pmw-copy" onclick="doCopy('${final.toFixed(2)}',this)">Copy result</button>`;
   rEl.className='pmw-result ok';
+  renderExtCard(s);
+}
+
+function renderExtCard(s) {
+  const card = document.getElementById('pmw-ext-card');
+  const body = document.getElementById('pmw-ext-body');
+  if (!card||!body) return;
+
+  let W=0,Y=0,C=0;
+  for (const a of s) { if(a==='W')W++; else if(a==='Y')Y++; else if(a==='C')C++; }
+
+  const pairs=[];
+  for (const p of document.getElementById('pmw-pairs').children) {
+    const id=p.id.replace('pp','');
+    const oS=document.getElementById('po'+id), mS=document.getElementById('pm'+id);
+    if(!oS||!mS) continue;
+    const origName=oS.options[oS.selectedIndex].text;
+    const mutName=mS.options[mS.selectedIndex].text;
+    if(mutName==='None'||oS.selectedIndex===0) continue;
+    const origAA=origName.split('–')[0].trim();
+    const canonEps=CANON_EXT[origAA]||0;
+    const extData=lookupNcaaExt(mutName);
+    const ncaaEps=(extData?extData.find(e=>e.wl===280):null)||{eps:0};
+    // Include if ncAA has known ε, OR if replacing a W/Y (must subtract their contribution)
+    if(extData||canonEps>0) pairs.push({origAA, ncaaName:mutName, canonEps, ncaaEps:ncaaEps.eps, hasKnown:!!extData});
+  }
+
+  if(pairs.length===0) { card.style.display='none'; return; }
+  card.style.display='block';
+
+  let eps280 = W*5500+Y*1490+Math.floor(C/2)*125;
+  const corrections=[];
+  for (const p of pairs) {
+    eps280=eps280-p.canonEps+p.ncaaEps;
+    const ncaaLabel=p.ncaaName.split(' ')[0];
+    const epsLabel=p.hasKnown?`+${p.ncaaEps.toLocaleString()}`:'ε unknown (assumed 0)';
+    corrections.push(`${p.origAA} → ${ncaaLabel} (−${p.canonEps.toLocaleString()} ${epsLabel})`);
+  }
+
+  const corrNote = corrections.length ? corrections.join(', ') : 'Pace formula';
+  body.innerHTML=`
+    <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px">
+      <span style="font-size:28px;font-weight:500;color:var(--text-primary)">${eps280.toLocaleString()}</span>
+      <span style="font-size:14px;color:var(--text-secondary)">M⁻cm⁻ (at 280 nm)</span>
+    </div>
+    <div style="font-size:12px;color:var(--text-secondary);margin-bottom:10px">${corrNote}</div>`;
 }
 
 function doCopy(text,btn) { navigator.clipboard.writeText(text).then(()=>{btn.textContent='Copied!';setTimeout(()=>btn.textContent='Copy result',1500);}); }
@@ -644,6 +758,7 @@ function pmwClear() {
     if (o) o.selectedIndex=0; if (m) m.selectedIndex=0;
   }
   document.getElementById('pmw-result').className='pmw-result';
+  const ec=document.getElementById('pmw-ext-card'); if(ec) ec.style.display='none';
 }
 
 
@@ -683,6 +798,17 @@ function toggleDark() {
 (function(){
   try { if (localStorage.getItem('pmw-dark')==='1') { document.body.classList.add('dark'); document.getElementById('pmw-dark-btn').textContent='☾'; } } catch(e) {}
 })();
+
+
+window.pmwCalc       = pmwCalc;
+window.pmwClear      = pmwClear;
+window.pmwAdd        = pmwAdd;
+window.pmwRm         = pmwRm;
+window.loadSeq       = loadSeq;
+window.previewSeq    = previewSeq;
+window.doCopy        = doCopy;
+window.drawStructure = drawStructure;
+window.toggleDark    = toggleDark;
 
 document.getElementById('pmw-seq').addEventListener('input', pmwLive);
 renderSeqSelector();
